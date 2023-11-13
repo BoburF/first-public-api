@@ -1,0 +1,16 @@
+{
+  "name": "first-public-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Bobur Abdullayev<b.abdullayev2023@mail.ru>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.9.0"
+  }
+}
