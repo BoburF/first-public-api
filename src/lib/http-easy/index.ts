@@ -10,6 +10,7 @@ export interface Request extends IncomingMessage{
 
 export interface Response extends ServerResponse{
     send: (msg: string) => void
+    status: (statusNumber: number) => void
 }
 
 export default class HttpEasy implements IHttpEasy{

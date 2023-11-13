@@ -10,7 +10,6 @@ server.get("/", (req, res) => {
 
 server.post("/token", (req, res) => {
     const body = req.body
-
     res.send(JSON.stringify(body.secret))
 })
 
