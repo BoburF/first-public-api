@@ -4,13 +4,8 @@ import * as http from "http";
 
 const server = new HttpEasy(http.createServer())
 
-server.get("/", (req, res) => {
-    res.send(`get request to ${req.url} and ${JSON.stringify(req.body)}`)
-})
-
-server.post("/token", (req, res) => {
-    const body = req.body
-    res.send(JSON.stringify(body.secret))
+server.get("/", function (req, res) {
+    res.send({hello: "world!"})
 })
 
 server.listen(3000, () => {

@@ -6,6 +6,8 @@ class HttpEasy {
         this.callbacks = {
             get: {},
             post: {},
+            update: {},
+            delete: {}
         };
     }
     get(url, cb) {
@@ -14,16 +16,20 @@ class HttpEasy {
     post(url, cb) {
         this.callbacks.post[url] = cb;
     }
+    update(url, cb) {
+        this.callbacks.update[url] = cb;
+    }
+    delete(url, cb) {
+        this.callbacks.delete[url] = cb;
+    }
     listen(port, cb) {
         this.httpServer.on("request", async (req, res) => {
             await this.setUpRequestAndResponse(req, res);
             const callback = this.callbacks[req.method.toLowerCase()][req.url];
             if (callback) {
-                callback(req, res);
+                return callback(req, res);
             }
-            else {
-                res.send(`404:Not found resource ${req.url}`);
-            }
+            return res.send(`404:Not found resource ${req.url}`);
         });
         this.httpServer.listen(port, cb);
     }
@@ -48,8 +54,8 @@ class HttpEasy {
             res.statusCode = statusNumber;
         };
         res['send'] = function (msg) {
-            res.write(msg);
-            res.end();
+            res.write(JSON.stringify(msg));
+            return res.end();
         };
     }
 }
